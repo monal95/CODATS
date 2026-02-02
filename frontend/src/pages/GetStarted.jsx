@@ -10,7 +10,7 @@ export default function GetStarted({ onOpenLogin, onOpenSignup }) {
         <p className="text-secondary-600 dark:text-secondary-300 mb-6 transition-colors duration-200">
           CODATS helps you detect security vulnerabilities across your codebase using a combination of
           rule-based analysis and AI-generated recommendations. Scan JavaScript, TypeScript, Python, Java
-          and more — get prioritized findings and suggested fixes so you can remediate issues faster.
+          and more — get prioritized findings and suggested fixes so you can remediate issues more faster.
         </p>
 
         <ul className="text-left text-secondary-600 dark:text-secondary-300 mb-8 space-y-2 transition-colors duration-200">
