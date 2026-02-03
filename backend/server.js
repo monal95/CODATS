@@ -29,7 +29,7 @@ console.log('- GROQ_API_KEY present:', !!process.env.GROQ_API_KEY);
 
 const mongoose = require('mongoose');
 const { scanCode, detectLanguage } = require('./scanner');
-const { getAIAnalysis } = require('./ai/gemini'); // Change to ./ai/ai if you renamed
+const { getAIAnalysis } = require('./ai/gemini'); // AI module for Groq LLM
 
 // Connect to MongoDB if MONGODB_URI provided
 const MONGODB_URI = process.env.MONGODB_URI || process.env.MONGO_URI || '';
@@ -104,7 +104,7 @@ app.get('/api/health', (req, res) => {
  */
 app.get('/api/ai/health', async (req, res) => {
   try {
-    const { testAPIConnectivity } = require('./ai/gemini'); // Change to ./ai/ai if renamed
+    const { testAPIConnectivity } = require('./ai/gemini'); // AI module for Groq LLM
     const result = await testAPIConnectivity();
     
     res.json({
@@ -399,8 +399,8 @@ app.use((req, res) => {
 });
 
 // Start server
-const HOST = process.env.HOST || '127.0.0.1';
-app.listen(PORT, HOST, () => {
+const HOST = process.env.HOST || '0.0.0.0';
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
