@@ -1,0 +1,17 @@
+[build]
+  command = "yarn build"
+  publish = "dist"
+
+[env.production]
+  VITE_API_URL = "https://codats-1.onrender.com/api"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://codats-1.onrender.com/api/:splat"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
