@@ -10,6 +10,8 @@
   [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 </div>
 
+### Demo : https://codats.netlify.app/
+
 ## 🛡️ Overview
 
 CODATS (Code Analysis & Threat Scanning System) is a comprehensive security scanning tool that analyzes source code for potential vulnerabilities. It uses rule-based pattern matching combined with AI-powered analysis (Gemini/Groq) to detect security issues and provide fix recommendations.

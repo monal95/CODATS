@@ -29,7 +29,7 @@ console.log('- GROQ_API_KEY present:', !!process.env.GROQ_API_KEY);
 
 const mongoose = require('mongoose');
 const { scanCode, detectLanguage } = require('./scanner');
-const { getAIAnalysis } = require('./ai/gemini'); // Change to ./ai/ai if you renamed
+const { getAIAnalysis } = require('./ai/gemini'); // AI module for Groq LLM
 
 // Connect to MongoDB if MONGODB_URI provided
 const MONGODB_URI = process.env.MONGODB_URI || process.env.MONGO_URI || '';
@@ -47,7 +47,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+// Configure CORS for production
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://codats.netlify.app'
+    : '*',
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -104,7 +112,7 @@ app.get('/api/health', (req, res) => {
  */
 app.get('/api/ai/health', async (req, res) => {
   try {
-    const { testAPIConnectivity } = require('./ai/gemini'); // Change to ./ai/ai if renamed
+    const { testAPIConnectivity } = require('./ai/gemini'); // AI module for Groq LLM
     const result = await testAPIConnectivity();
     
     res.json({
@@ -399,8 +407,9 @@ app.use((req, res) => {
 });
 
 // Start server
-const HOST = process.env.HOST || '127.0.0.1';
+const HOST = process.env.HOST || '0.0.0.0';
 app.listen(PORT, HOST, () => {
+
   console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
